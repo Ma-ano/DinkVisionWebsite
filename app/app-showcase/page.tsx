@@ -1,13 +1,10 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import AppShowcase from "./showcase";
 import { chapters } from "./chapters";
 import "./showcase.css";
 
-export const metadata = {
-  title: "The Courtside Experience",
-  description:
-    "Explore the DinkVision recording journey, from the first tap to a saved match, through six real app screens.",
-};
+export const metadata = pageMetadata("/app-showcase");
 
 export default function ShowcasePage() {
   return (

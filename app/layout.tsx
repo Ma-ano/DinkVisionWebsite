@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
+import { isPreview, siteUrl } from "@/lib/seo";
 import { businessEmail, facebook } from "@/lib/site";
 import Header from "./ui/header";
 import "./globals.css";
@@ -17,13 +18,20 @@ const body = localFont({
   weight: "100 1000",
   variable: "--body",
 });
+const googleVerification = process.env.DINKVISION_GOOGLE_SITE_VERIFICATION?.trim();
+const bingVerification = process.env.DINKVISION_BING_SITE_VERIFICATION?.trim();
+
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
-    default: "DinkVision | Your game. On replay.",
+    default: "DinkVision | Pickleball Court Recording and Replay",
     template: "%s | DinkVision",
   },
-  description:
-    "Courtside pickleball match recording and replay for players and venues.",
+  ...(isPreview && { robots: { index: false, follow: true } }),
+  verification: {
+    google: googleVerification || undefined,
+    other: bingVerification ? { "msvalidate.01": bingVerification } : undefined,
+  },
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

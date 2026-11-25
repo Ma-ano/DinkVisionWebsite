@@ -1,4 +1,5 @@
 export const businessEmail = "wrenlabsph@gmail.com";
+export const wrenLabsUrl = "https://wrenlabs-dusky-seven.vercel.app/";
 export const facebook =
   "https://www.facebook.com/share/1JF4a8NTu8/?mibextid=wwXIfr";
 

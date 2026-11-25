@@ -1,7 +1,8 @@
+import { pageMetadata } from "@/lib/seo";
 import { businessEmail } from "@/lib/site";
 import Link from "next/link";
 import { Kicker } from "../ui/shared";
-export const metadata = { title: "Recording notice" };
+export const metadata = pageMetadata("/privacy");
 export default function Privacy() {
   return (
     <article className="reading interior notice">
@@ -34,6 +35,12 @@ export default function Privacy() {
         Contact your venue with your court number, match date and approximate
         local time. The <Link href="/players">player guide</Link> includes help
         finding a replay.
+      </p>
+      <h2>Website quote inquiries</h2>
+      <p>
+        The quote form prepares an email draft in your browser. When you send
+        the draft, your email service delivers the details you include to
+        WrenLabs PH.
       </p>
       <p>
         For DinkVision business inquiries, email{" "}

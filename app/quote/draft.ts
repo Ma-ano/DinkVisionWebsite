@@ -1,7 +1,9 @@
-"use server";
 import { businessEmail } from "@/lib/site";
-export async function prepareDraft(data: FormData) {
-  const read = (key: string) => String(data.get(key) ?? "").trim();
+export function prepareDraft(data: FormData) {
+  const read = (key: string) => {
+    const value = data.get(key);
+    return typeof value === "string" ? value.trim() : "";
+  };
   const custom = read("inquiry") === "custom-application";
   const venue = read("venue"),
     city = read("city"),
@@ -17,10 +19,13 @@ export async function prepareDraft(data: FormData) {
         !Number.isSafeInteger(Number(courts)))) ||
     (custom && !notes) ||
     !contact ||
-    [venue, city, contact].some((s) => s.length > 120) ||
+    [venue, city, contact].some(
+      (value) => value.length > 120 || /[\r\n]/.test(value) || value.includes("\0"),
+    ) ||
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    email.length > 254 ||
-    notes.length > 1000
+    (email.length > 254 || email.includes("\0")) ||
+    notes.length > 1000 ||
+    notes.includes("\0")
   ) {
     return {
       error: custom

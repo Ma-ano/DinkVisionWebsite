@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { media } from "@/lib/site";
+import { media, wrenLabsUrl } from "@/lib/site";
 import "./about.css";
 
 const services = [
@@ -85,7 +85,7 @@ export default function About() {
             <Link className="btn" href="/quote?inquiry=custom-application">
               Discuss your idea <span aria-hidden="true">↗</span>
             </Link>
-            <a href="https://wrenlabs-dusky-seven.vercel.app/">
+            <a href={wrenLabsUrl}>
               Visit WrenLabs PH <span aria-hidden="true">↗</span>
             </a>
           </div>

@@ -1,36 +1,24 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { businessEmail } from "@/lib/site";
-import { prepareDraft } from "./action";
+import { prepareDraft } from "./draft";
+
+function subscribeToHydration() {
+  return () => {};
+}
 export default function QuoteForm({ custom = false }: { custom?: boolean }) {
-  const [pending, setPending] = useState(false),
-    [error, setError] = useState(""),
-    [draft, setDraft] = useState("");
-  const locked = useRef(false);
-  async function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (locked.current) return;
-    const data = new FormData(e.currentTarget);
-    locked.current = true;
-    setPending(true);
-    setError("");
-    setDraft("");
-    try {
-      const result = await prepareDraft(data);
-      if (result.error) setError(result.error);
-      else {
-        setDraft(result.url);
-        window.location.href = result.url;
-      }
-    } catch {
-      setError(
-        "Your draft could not be prepared. Try again or email WrenLabs directly.",
-      );
-    } finally {
-      locked.current = false;
-      setPending(false);
-    }
+  const hydrated = useSyncExternalStore(subscribeToHydration, () => true, () => false);
+  const [error, setError] = useState("");
+  const [draft, setDraft] = useState("");
+
+  function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const result = prepareDraft(new FormData(event.currentTarget));
+    setError(result.error);
+    setDraft(result.url);
+    if (result.url) window.location.href = result.url;
   }
+
   return (
     <form
       onSubmit={submit}
@@ -51,7 +39,7 @@ export default function QuoteForm({ custom = false }: { custom?: boolean }) {
         name="inquiry"
         value={custom ? "custom-application" : "dinkvision"}
       />
-      <fieldset disabled={pending}>
+      <fieldset disabled={!hydrated}>
         <div className="fields">
           <label className="wide">
             {custom ? "Company or organization (optional)" : "Venue name"}
@@ -130,7 +118,7 @@ export default function QuoteForm({ custom = false }: { custom?: boolean }) {
           </label>
         </div>
         <button className="btn" type="submit">
-          {pending ? "Preparing draft…" : custom ? "Email my project inquiry" : "Email my quote request"}{" "}
+          {custom ? "Email my project inquiry" : "Email my quote request"}{" "}
           <span aria-hidden>↗</span>
         </button>
       </fieldset>

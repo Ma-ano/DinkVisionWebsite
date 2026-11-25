@@ -1,10 +1,8 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import "./projects.css";
 
-export const metadata = {
-  title: "Upcoming Projects | WrenLabs PH",
-  description: "Explore future concepts for DinkVision and WrenLabs PH, from coaching and AI-powered replay to custom business systems.",
-};
+export const metadata = pageMetadata("/upcoming-projects");
 
 type Concept = {
   title: string;

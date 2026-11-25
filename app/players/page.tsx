@@ -1,7 +1,8 @@
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { guide, media } from "@/lib/site";
 import { Kicker } from "../ui/shared";
-export const metadata = { title: "Player guide" };
+export const metadata = pageMetadata("/players");
 export default function Players() {
   return (
     <div className="reading interior">
@@ -10,8 +11,8 @@ export default function Players() {
         Record your <em>match.</em>
       </h1>
       <p className="lead">
-        Use the tablet beside your court. Here’s what to do before and after you
-        play.
+        Use the courtside tablet to record your pickleball match and find your
+        replay after play.
       </p>
       <Image
         className="guide-photo"

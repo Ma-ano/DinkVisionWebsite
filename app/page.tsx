@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { homeStructuredData, pageMetadata } from "@/lib/seo";
 import { media, guide } from "@/lib/site";
 import heroPoster from "@/public/media/hero-paddle.webp";
 import { Replay, BackgroundVideo } from "./ui/replay";
@@ -8,6 +9,8 @@ import Cards from "./ui/cards";
 import HomeSections from "./ui/home-sections";
 import VideoCarousel from "./ui/video-carousel";
 import { Action, Kicker } from "./ui/shared";
+export const metadata = pageMetadata("/");
+
 export default function Home() {
   const cards = [
     { title: guide[0][0], detail: guide[0][1], image: media.tabletApp },
@@ -21,6 +24,12 @@ export default function Home() {
   ];
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeStructuredData).replace(/</g, "\u003c"),
+        }}
+      />
       <section className="hero">
         <Image
           className="hero-poster"
@@ -37,8 +46,8 @@ export default function Home() {
         <div className="hero-intro">
           <Kicker>Pickleball court recording</Kicker>
           <p>
-            Give your players a courtside way to record a match and watch it
-            again.
+            Give your players a courtside way to record and replay pickleball
+            matches.
           </p>
         </div>
         <h1>

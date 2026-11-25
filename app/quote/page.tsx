@@ -1,13 +1,16 @@
 import Image from "next/image";
+import { customInquiryPath, pageMetadata } from "@/lib/seo";
 import { media } from "@/lib/site";
 import { Kicker } from "../ui/shared";
 import QuoteForm from "./form";
-export const metadata = { title: "Request a quote" };
-export default async function Quote({
-  searchParams,
-}: {
-  searchParams: Promise<{ inquiry?: string | string[] }>;
-}) {
+type QuoteProps = { searchParams: Promise<{ inquiry?: string | string[] }> };
+
+export async function generateMetadata({ searchParams }: QuoteProps) {
+  const custom = (await searchParams).inquiry === "custom-application";
+  return pageMetadata(custom ? customInquiryPath : "/quote");
+}
+
+export default async function Quote({ searchParams }: QuoteProps) {
   const custom = (await searchParams).inquiry === "custom-application";
   if (custom) {
     return (

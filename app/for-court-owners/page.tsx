@@ -1,7 +1,8 @@
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { media } from "@/lib/site";
 import { Action, Kicker } from "../ui/shared";
-export const metadata = { title: "For court owners" };
+export const metadata = pageMetadata("/for-court-owners");
 export default function Owners() {
   return (
     <div className="shell interior">
@@ -12,8 +13,8 @@ export default function Owners() {
             Your court <em>setup.</em>
           </h1>
           <p className="lead">
-            Each equipped court pairs a camera with a tablet running your
-            venue-branded DinkVision app.
+            Equip your pickleball court with a fixed camera and a tablet
+            running your venue-branded DinkVision recording app.
           </p>
           <Action href="/quote">Request a quote</Action>
         </div>
