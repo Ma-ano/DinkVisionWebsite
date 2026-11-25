@@ -1,0 +1,22 @@
+:root {
+  --dv-navy: #001f49;
+  --dv-teal: #00a99a;
+  --dv-paper: #f7f9f7;
+  --dv-white: #ffffff;
+  --dv-ink: #001f49;
+  --dv-body: #314b5b;
+  --dv-muted: #526a75;
+  --dv-rule: #cedbd9;
+  --dv-mint: #e5f4ef;
+  --dv-teal-text: #006b64;
+  --dv-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --dv-sans: "DM Sans", Arial, sans-serif;
+  --dv-max-width: 1280px;
+  --dv-round-media: 22px;
+  --dv-round-pill: 999px;
+  --dv-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dv-ease-width: cubic-bezier(0.22, 0.8, 0.25, 1);
+  --dv-enter: 680ms;
+  --dv-line-stagger: 90ms;
+  --dv-card: 320ms;
+}
